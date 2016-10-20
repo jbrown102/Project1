@@ -10,6 +10,9 @@ class MySyntaxAnalyzer extends SyntaxAnalyzer {
       body()
       if (Compiler.currentToken.equalsIgnoreCase(CONSTANTS.DOCE)) {
         // Do Stuff
+      } else {
+        println("SYNTAX ERROR : uh oh")
+        System.exit(1)
       }
     } else {
       println("SYNTAX ERROR : uh oh")
