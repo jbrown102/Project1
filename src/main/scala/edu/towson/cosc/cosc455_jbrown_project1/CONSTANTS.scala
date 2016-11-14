@@ -1,5 +1,11 @@
 package edu.towson.cosc.cosc455_jbrown_project1
 
+//
+// Jacob Brown
+// COSC 455-001
+// Project 1: CONSTANTS.scala
+//
+
 object CONSTANTS {
   val DOCB : String = "\\BEGIN"
   val DOCE : String = "\\END"
@@ -11,7 +17,7 @@ object CONSTANTS {
   val BOLD : String = "**"
   val ITALICS : String = "*"
   val LISTITEM : String = "+"
-  val NEWLINE : String = "\\"  // Is this right?
+  val NEWLINE : String = "\\\\"
   val LINKB : String = "["
   val ADDRESSB : String = "("
   val ADDRESSE : String = ")"
@@ -19,6 +25,7 @@ object CONSTANTS {
   val DEFB : String = "\\DEF["
   val EQSIGN : String = "="
   val USEB : String = "\\USE["
-  val REQTEXT :  // Finish this line (any plain text)
-  val TEXT :  // Finish this line (any plain text) | e [empty set]
-}
+  val REQTEXT : String = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789,."  // Required text is plain text
+  val SYMBOLS : String = "\\#*[!]+()="
+  // val TEXT : String = REQTEXT || null  // Is this right/needed?
+}  // End of CONSTANTS.scala

@@ -1,41 +1,60 @@
 package edu.towson.cosc.cosc455_jbrown_project1
 
-// import scala.io.Source._
+//
+// Jacob Brown
+// COSC 455-001
+// Project 1: Compiler.scala
+//
 
 object Compiler {
 
-  var currentToken : String = ""  // Space or no space
-  var fileContents : String = ""  // Same here
-
+  var currentToken : String = ""
+  var fileContents : String = ""
   val Scanner = new MyLexicalAnalyzer
   val Parser = new MySyntaxAnalyzer
-  val SemanticAnalyzer = new MySyntaxAnalyzer
+  val SemanticAnalyzer = new MySemanticAnalyzer
+  var end: Boolean = false
+  var fileName: String = ""
 
-  def main(args : Array[String]) = {
+  def main(args : Array[String]) = {  // Main method for Compiler.scala
 
-    // println(args{0})  <- USE THIS??
-    checkfile(args)  // check usage
+    fileName = args(0)
+    checkfile(args)
     readfile(args(0))
-    // println(fileContents)  <- USE THIS??
-    Scanner.getNextToken()  // gets first token
 
-    //  Parser.gittex()  // calls start state of BNF in SyntaxAnalyzer  <- USE THIS??
-    // on return, there is a parse tree
-  }
+    println("File starting...")
+    println(fileContents)
+    println()
+    println("Processing...")
 
-    def readfile(file : String) = {
-      val source = scala.io.Source.fromFile(file)
-      fileContents = try source.mkString finally source.clone()
-    }
+    Scanner.start(fileContents)  // Passes fileContents as string to Scanner (MyLexicalAnalyzer)
 
-    def checkfile(args : Array[String]) = {
-      if (args.length != 1) {
-        println("USAGE ERROR: wrong number of args")
-        System.exit(1)
-      } else if (! args(0).endsWith(".mkd")) {
-        println("USAGE ERROR: wrong extension")
-        System.exit(1)
+    while (Scanner.filePos < Scanner.fileSize && !end) {
+      Scanner.getNextToken()  // Gets current token using LexicalAnalyzer
+      Parser.gittex()  // Calls start state of BNF in SyntaxAnalyzer
+      if (currentToken.equalsIgnoreCase(CONSTANTS.DOCE)) {
+        end = true  // Ends while loop and continues to HTML processing
       }
     }
+
+    println("File has been processed...\n")
+    println("File is now being converted to HTML...\n")
+
+    SemanticAnalyzer.semantics()  // Calls SemanticAnalyzer
+  }  // End of main()
+
+  def readfile(file : String) = {  // Changes file text to string
+    val source = scala.io.Source.fromFile(file)
+    fileContents = try source.mkString finally source.close()
   }
 
+  def checkfile(args : Array[String]) = {
+    if (args.length != 1) {
+      println("USAGE ERROR: Wrong number of arguments...sorry...")
+      System.exit(1)
+    } else if (!args(0).endsWith(".mkd")) {
+      println("USAGE ERROR: Wrong extension type...sorry...")
+      System.exit(1)
+    }
+  }
+}  // End of Compiler.scala
