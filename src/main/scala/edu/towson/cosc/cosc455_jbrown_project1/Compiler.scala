@@ -8,6 +8,13 @@ package edu.towson.cosc.cosc455_jbrown_project1
 
 object Compiler {
 
+  // STARTING NOTES
+  // - A .jar for the project was created.  It is placed in .idea/artifacts.
+  //   -  This most likely did not work properly.  There were runtime errors and it wouldn't allow me to select the Compiler program as the main class
+  // - The Scaladocs for the project were attempted as well, but there was another runtime error that wouldn't allow them to be created at all.
+  //   - The error statement was placed in its place in the documentation folder.
+  // Both of these issues occurred exactly the same way as in Lab 4, so it has to be something with IntelliJ/Java on this laptop
+
   var currentToken : String = ""
   var fileContents : String = ""
   val Scanner = new MyLexicalAnalyzer
